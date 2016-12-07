@@ -32,7 +32,9 @@ void parseQuotes()
     char *token;
     token = strtok(quotes, "\"");
     for( int count = 0; token != NULL; count++ ) {
-        if (count%2 == 0) quote_array[++quote_count] = token;        printf("%s",token); //Every other token is a quote, odd tokens are just a comma, maybe some whitespace and a newline
+        if (count%2 == 0)
+            quote_array[++quote_count] = token;
+        // printf("%s",token); // Every other token is a quote, odd tokens are just a comma, maybe some whitespace and a newline
         token = strtok(NULL, "\"");
     }
 }
@@ -49,12 +51,12 @@ int GetNewlineCount(char *s)
 
 void DrawClientSize(HWND hwnd, HDC hdc, RECT *prc, HFONT hf)
 {
-	char szSize[100];
-	char szTitle[] = "These are the dimensions of your client area:";
-	SelectObject(hdc, hf);
+    char szSize[100];
+    char szTitle[] = "These are the dimensions of your client area:";
+    SelectObject(hdc, hf);
     int h = 0;
     int w = 0;
-    printf("%s\n",quote);
+    // printf("%s\n",quote);
     char quote_tmp[4096];
     strcpy(quote_tmp, quote);
     char *token = strtok(quote_tmp, "\n");
@@ -64,7 +66,6 @@ void DrawClientSize(HWND hwnd, HDC hdc, RECT *prc, HFONT hf)
         token = strtok(NULL, "\n");
         if (sizer.cx > w) w = sizer.cx;
         h=sizer.cy;
-        //free(sizer);
     }
     h = h * (GetNewlineCount(quote) + 1);
     RECT newRect = {0,0,w,h};
@@ -111,17 +112,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         
         case WM_PAINT:
         {
-            printf("paint");
-			RECT rcClient;
-			PAINTSTRUCT ps;
-			HDC hdc = BeginPaint(hwnd, &ps);
+            // printf("paint");
+            RECT rcClient;
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hwnd, &ps);
             HFONT g_hfFont = CreateFont(36, 0, 0, 0, 0, FALSE, 0, 0, 0, 0, 0, 0, 0, "Arial");
 
-			GetClientRect(hwnd, &rcClient);
+            GetClientRect(hwnd, &rcClient);
 
-			DrawClientSize(hwnd, hdc, &rcClient, g_hfFont);
+            DrawClientSize(hwnd, hdc, &rcClient, g_hfFont);
 
-			EndPaint(hwnd, &ps);
+            EndPaint(hwnd, &ps);
         }
         default:
             return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -135,9 +136,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     srand(time(NULL)); //randomize the randomizer with not so random current time
     rand(); //throw away first rand, for some reason the first is always about the same
     getQuotes("THEMETER"); //populate the quote_array and set quote_count
-    printf("END METER %d %s\n", quote_count, quote_array[30]);
+    // printf("END METER %d %s\n", quote_count, quote_array[30]);
     getQuotes("QUOTES"); //populate the quote_array and set quote_count
-    printf("END QUOTES %d %s\n", quote_count, quote_array[100]);
+    // printf("END QUOTES %d %s\n", quote_count, quote_array[100]);
     parseQuotes();
     newQuote();
     
