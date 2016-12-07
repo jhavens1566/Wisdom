@@ -1,0 +1,18 @@
+This is a resurection of some very old code with some historical significance.
+
+This is a work in progress, the text parsing is NOT safe or good yet, but
+works good enough for just the first two sample files. It is designed to
+compile into very small .exe for windows.
+
+build on windows:
+  - install mingw
+  - make clean all
+
+cross build on linux for win32 target:
+  - apt-get install mingw-w64
+  - make CC=i686-w64-mingw32-gcc WISE=wisdom.exe clean all
+  - runs fine under wine
+
+build on Linux/UNIX for Linux/UNIX:
+  - make -f Makefile.linux clean all
+  - make -f Makefile.linux install
