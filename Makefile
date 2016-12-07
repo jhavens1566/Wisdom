@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -std=c99 -s -mwindows
 LIBS = -lgdi32
-CWISE = wisdom.c
+CWISE = wisdom.c wisdom_win.c
 WISE = wisdom
 
 all: $(WISE) 

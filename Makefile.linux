@@ -1,0 +1,21 @@
+CFLAGS = -std=c99
+LIBS =
+CWISE = wisdom.c wisdom_ansi.c
+WISE = wisdom
+INSTALL ?= install
+
+all: $(WISE) 
+	@echo  $(WISE) has been compiled
+	
+$(WISE): $(CWISE)
+	$(CC) $(CFLAGS) $(CWISE) -o $(WISE) $(LIBS)
+
+clean: 
+	$(RM) -f wisdom.exe wisdom
+
+install: all
+	$(INSTALL) -D -m 755 -o root -g root wisdom /usr/bin/wisdom
+	$(INSTALL) -D -m 644 -o root -g root THEMETER /usr/lib/Wisdom/THEMETER
+	$(INSTALL) -D -m 644 -o root -g root QUOTES /usr/lib/Wisdom/QUOTES
+
+.PHONY: all clean install

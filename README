@@ -14,4 +14,5 @@ cross build on linux for win32 target:
   - runs fine under wine
 
 build on Linux/UNIX for Linux/UNIX:
-  - todo:
+  - make -f Makefile.linux clean all
+  - make -f Makefile.linux install
